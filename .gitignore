@@ -54,7 +54,6 @@ retrievers/.chroma/*
 workflow_streaming_test.log
 .claude
 .windsurf
-*.md
 
 # repowise API keys (local)
 .repowise
