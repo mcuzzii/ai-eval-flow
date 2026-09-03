@@ -1,0 +1,64 @@
+# --- Environments ---
+.venv/
+*.egg-info/
+
+# --- Secrets and Config ---
+.env
+*.local
+secrets.yaml
+
+# --- Python Artifacts ---
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+*.pyc
+.cache/
+# Virtual environments
+.venv
+
+# Editor & IDE directories
+.vscode/
+.idea/
+
+# macOS / Linux system files
+.DS_Store
+Thumbs.db
+
+# Python tooling caches
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs and runtime data
+*.log
+logs/
+
+# Test & coverage artifacts
+coverage.xml
+
+# Local environment files
+.env
+
+# Database & data artifacts
+*.sqlite
+*.db
+.chroma
+notes.md
+retrievers/.chroma/*
+
+*.pid
+workflow_streaming_test.log
+.claude
+.windsurf
+*.md
+
+# repowise API keys (local)
+.repowise
+
+# data files
+*.json
+*.joblib

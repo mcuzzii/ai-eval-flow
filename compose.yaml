@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    image: pydev:latest
+    working_dir: /project
+
+    ports:
+      - "8501:8501"
+
+    volumes:
+      - .:/project
+      - venv:/project/.venv
+
+    command:
+      - sh
+      - -c
+      - |
+        uv sync --frozen &&
+        uv run streamlit run app.py --server.address=0.0.0.0 --server.port=8501
+
+volumes:
+  venv:

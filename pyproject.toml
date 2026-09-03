@@ -1,0 +1,114 @@
+[project]
+name = "rag-eval"
+version = "0.1.0"
+description = "RAG evaluation example using Ragas"
+requires-python = ">=3.9"
+dependencies = [
+    "ragas[all]>=0.3.0",
+    "openai>=1.0.0",
+    "cohere>=5.21.1",
+    "litellm>=1.83.0",
+    "google-genai>=1.2.0",
+    "jsonref>=1.1.0",
+    "streamlit>=1.50.0",
+    "pandas>=2.3.3",
+    "ollama>=0.6.2",
+    "sqlalchemy>=2.0.49",
+    "dotenv>=0.9.9",
+    "puremagic>=1.30",
+    "chonkie>=1.4.2",
+    "asyncio>=4.0.0",
+    "httpx>=0.27.2",
+    "pydantic>=2.12.5",
+    "qdrant-client>=1.16.1",
+    "psycopg2-binary>=2.9.12",
+    "plotly>=6.8.0",
+]
+
+[project.optional-dependencies]
+observability = [
+    # "openlit>=1.0.0",  # commented out — using mlflow
+    "mlflow",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "metadata_retrieval/tests"]
+norecursedirs = [
+    "tmp",
+    ".git",
+    ".tox",
+    "dist",
+    "build",
+    "*.egg",
+    ".cache",
+    "__pycache__",
+]
+addopts = [
+    "--cov=.",
+    "--cov-report=term",
+    "--strict-markers",
+    "--disable-warnings",
+    "--tb=short",
+    "--ignore=tmp",
+    "--ignore=tests/e2e",
+]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "slow: marks tests as slow running",
+    "asyncio: marks tests as asyncio tests",
+    "e2e: end-to-end tests requiring running frontend and backend servers",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+    "ignore::RuntimeWarning",
+]
+
+[tool.ruff]
+exclude = [
+    "tmp",
+    ".git",
+    ".tox",
+    "dist",
+    "build",
+    "*.egg-info",
+    "__pycache__",
+    ".cache",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]  # Line too long
+
+[tool.mypy]
+exclude = [
+    "tmp/",
+]
+ignore_missing_imports = true
+install_types = true
+non_interactive = true
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0",
+]
+
+[tool.setuptools]
+py-modules = []
+
+[tool.uv]
+managed = true
+environments = [
+    "sys_platform == 'darwin' and platform_machine == 'x86_64'", # Your Intel Mac
+    "sys_platform == 'darwin' and platform_machine == 'arm64'",  # M1/M2/M3 Macs
+    "sys_platform == 'linux' and platform_machine == 'x86_64'",   # Linux
+    "sys_platform == 'win32' and platform_machine == 'AMD64'",   # Standard Windows (Intel/AMD)
+]
+
+[tool.uv.sources]
+ragas = { git = "https://github.com/vibrantlabsai/ragas.git", rev = "refs/pull/2657/head" }
+# Note: When developing locally, use:
+# uv sync --override ragas@path/to/ragas
